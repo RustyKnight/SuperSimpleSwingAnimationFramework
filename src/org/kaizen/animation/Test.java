@@ -5,6 +5,8 @@
  */
 package org.kaizen.animation;
 
+import org.kaizen.animation.ranges.IntAnimatable;
+import org.kaizen.animation.ranges.IntRange;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,9 +16,8 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Duration;
-import org.kaizen.animation.easement.Easement;
-import org.kaizen.animation.easement.Easements;
-import org.kaizen.animation.easement.LinearEasement;
+import org.kaizen.animation.curves.Curves;
+import org.kaizen.animation.curves.LinearCurve;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,6 +25,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.kaizen.animation.curves.AnimationCurve;
 
 public class Test {
 
@@ -86,14 +88,14 @@ public class Test {
 	
 	public class EasementDescription {
 		private String name;
-		private Easement easement;
+		private AnimationCurve easement;
 
-		public EasementDescription(String name, Easement easement) {
+		public EasementDescription(String name, AnimationCurve easement) {
 			this.name = name;
 			this.easement = easement;
 		}
 
-		public Easement getEasement() {
+		public AnimationCurve getEasement() {
 			return easement;
 		}
 
@@ -107,46 +109,46 @@ public class Test {
 	public class EasementComboBoxModel extends DefaultComboBoxModel<EasementDescription> {
 
 		public EasementComboBoxModel() {
-			addElement(new EasementDescription("Linear", Easements.LINEAR.getEasement()));
-			addElement(new EasementDescription("Sine In", Easements.SINE_IN.getEasement()));
-			addElement(new EasementDescription("Sine Out", Easements.SINE_OUT.getEasement()));
-			addElement(new EasementDescription("Sine In/Out", Easements.SINE_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Quad In", Easements.QUAD_IN.getEasement()));
-			addElement(new EasementDescription("Quad Out", Easements.QUAD_OUT.getEasement()));
-			addElement(new EasementDescription("Quad In/Out", Easements.QUAD_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Cubic In", Easements.CUBIC_IN.getEasement()));
-			addElement(new EasementDescription("Cubic Out", Easements.CUBIC_OUT.getEasement()));
-			addElement(new EasementDescription("Cubic In/Out", Easements.CUBIC_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Quart In", Easements.QUART_IN.getEasement()));
-			addElement(new EasementDescription("Quart Out", Easements.QUART_OUT.getEasement()));
-			addElement(new EasementDescription("Quart In/Out", Easements.QUART_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Quint In", Easements.QUINT_IN.getEasement()));
-			addElement(new EasementDescription("Quint Out", Easements.QUINT_OUT.getEasement()));
-			addElement(new EasementDescription("Quint In/Out", Easements.QUINT_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Sextic In", Easements.SEXTIC_IN.getEasement()));
-			addElement(new EasementDescription("Sextic Out", Easements.SEXTIC_OUT.getEasement()));
-			addElement(new EasementDescription("Sextic In/Out", Easements.SEXTIC_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Septic In", Easements.SEPTIC_IN.getEasement()));
-			addElement(new EasementDescription("Septic Out", Easements.SEPTIC_OUT.getEasement()));
-			addElement(new EasementDescription("Septic In/Out", Easements.SEPTIC_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Octic In", Easements.OCTIC_IN.getEasement()));
-			addElement(new EasementDescription("Octic Out", Easements.OCTIC_OUT.getEasement()));
-			addElement(new EasementDescription("Octic In/Out", Easements.OCTIC_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Exponent In", Easements.EXPONENT_IN.getEasement()));
-			addElement(new EasementDescription("Exponent Out", Easements.EXPONENT_OUT.getEasement()));
-			addElement(new EasementDescription("Exponent In/Out", Easements.EXPONENT_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Circle In", Easements.CIRCLE_IN.getEasement()));
-			addElement(new EasementDescription("Circle Out", Easements.CIRCLE_OUT.getEasement()));
-			addElement(new EasementDescription("Circle In/Out", Easements.CIRCLE_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Back In", Easements.BACK_IN.getEasement()));
-			addElement(new EasementDescription("Back Out", Easements.BACK_OUT.getEasement()));
-			addElement(new EasementDescription("Back In/Out", Easements.BACK_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Elastic In", Easements.ELASTIC_IN.getEasement()));
-			addElement(new EasementDescription("Elastic Out", Easements.ELASTIC_OUT.getEasement()));
-			addElement(new EasementDescription("Elastic In/Out", Easements.ELASTIC_IN_OUT.getEasement()));
-			addElement(new EasementDescription("Bounce In", Easements.BOUNCE_IN.getEasement()));
-			addElement(new EasementDescription("Bounce Out", Easements.BOUNCE_OUT.getEasement()));
-			addElement(new EasementDescription("Bounce In/Out", Easements.BOUNCE_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Linear", Curves.LINEAR.getEasement()));
+			addElement(new EasementDescription("Sine In", Curves.SINE_IN.getEasement()));
+			addElement(new EasementDescription("Sine Out", Curves.SINE_OUT.getEasement()));
+			addElement(new EasementDescription("Sine In/Out", Curves.SINE_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Quad In", Curves.QUAD_IN.getEasement()));
+			addElement(new EasementDescription("Quad Out", Curves.QUAD_OUT.getEasement()));
+			addElement(new EasementDescription("Quad In/Out", Curves.QUAD_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Cubic In", Curves.CUBIC_IN.getEasement()));
+			addElement(new EasementDescription("Cubic Out", Curves.CUBIC_OUT.getEasement()));
+			addElement(new EasementDescription("Cubic In/Out", Curves.CUBIC_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Quart In", Curves.QUART_IN.getEasement()));
+			addElement(new EasementDescription("Quart Out", Curves.QUART_OUT.getEasement()));
+			addElement(new EasementDescription("Quart In/Out", Curves.QUART_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Quint In", Curves.QUINT_IN.getEasement()));
+			addElement(new EasementDescription("Quint Out", Curves.QUINT_OUT.getEasement()));
+			addElement(new EasementDescription("Quint In/Out", Curves.QUINT_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Sextic In", Curves.SEXTIC_IN.getEasement()));
+			addElement(new EasementDescription("Sextic Out", Curves.SEXTIC_OUT.getEasement()));
+			addElement(new EasementDescription("Sextic In/Out", Curves.SEXTIC_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Septic In", Curves.SEPTIC_IN.getEasement()));
+			addElement(new EasementDescription("Septic Out", Curves.SEPTIC_OUT.getEasement()));
+			addElement(new EasementDescription("Septic In/Out", Curves.SEPTIC_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Octic In", Curves.OCTIC_IN.getEasement()));
+			addElement(new EasementDescription("Octic Out", Curves.OCTIC_OUT.getEasement()));
+			addElement(new EasementDescription("Octic In/Out", Curves.OCTIC_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Exponent In", Curves.EXPONENT_IN.getEasement()));
+			addElement(new EasementDescription("Exponent Out", Curves.EXPONENT_OUT.getEasement()));
+			addElement(new EasementDescription("Exponent In/Out", Curves.EXPONENT_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Circle In", Curves.CIRCLE_IN.getEasement()));
+			addElement(new EasementDescription("Circle Out", Curves.CIRCLE_OUT.getEasement()));
+			addElement(new EasementDescription("Circle In/Out", Curves.CIRCLE_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Back In", Curves.BACK_IN.getEasement()));
+			addElement(new EasementDescription("Back Out", Curves.BACK_OUT.getEasement()));
+			addElement(new EasementDescription("Back In/Out", Curves.BACK_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Elastic In", Curves.ELASTIC_IN.getEasement()));
+			addElement(new EasementDescription("Elastic Out", Curves.ELASTIC_OUT.getEasement()));
+			addElement(new EasementDescription("Elastic In/Out", Curves.ELASTIC_IN_OUT.getEasement()));
+			addElement(new EasementDescription("Bounce In", Curves.BOUNCE_IN.getEasement()));
+			addElement(new EasementDescription("Bounce Out", Curves.BOUNCE_OUT.getEasement()));
+			addElement(new EasementDescription("Bounce In/Out", Curves.BOUNCE_IN_OUT.getEasement()));
 		}
 		
 	}
@@ -163,12 +165,12 @@ public class Test {
 
 		private AnimationHandler animationHandler = new AnimationHandler();
 
-		private Easement easement = new LinearEasement();
+		private AnimationCurve easement = new LinearCurve();
 
 		public AnimationPane() {
 		}
 
-		public void setEasement(Easement easement) {
+		public void setEasement(AnimationCurve easement) {
 			this.easement = easement;
 		}
 

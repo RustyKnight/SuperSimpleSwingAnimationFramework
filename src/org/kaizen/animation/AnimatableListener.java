@@ -11,4 +11,6 @@ package org.kaizen.animation;
  */
 public interface AnimatableListener {
     public void animationChanged(Animatable animator);
+    public void animationStarted(Animatable animator);
+    public void animationStopped(Animatable animator);
 }

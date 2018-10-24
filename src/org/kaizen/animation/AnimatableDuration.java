@@ -6,17 +6,17 @@
 package org.kaizen.animation;
 
 import java.time.Duration;
-import org.kaizen.animation.easement.Easement;
+import org.kaizen.animation.curves.AnimationCurve;
 
 /**
  *
  * @author shanewhitehead
  */
-public interface AnimatableDuration extends Animatable {
+public interface AnimatableDuration extends Animatable, PausableAnimatable {
     // Returns the amount of time that this animation
     // has played as a percantage of the playable duration
     // 0-1
     public double getProgress();
     public Duration getDuration();
-    public Easement getEasement();
+    public AnimationCurve getCurve();
 }

@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.kaizen.animation;
+package org.kaizen.animation.ranges;
 
+import org.kaizen.animation.ranges.Range;
 import java.time.Duration;
-import org.kaizen.animation.easement.Easement;
+import org.kaizen.animation.AnimatableDuration;
+import org.kaizen.animation.curves.AnimationCurve;
 
 /**
  *

@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.kaizen.animation.easement;
+package org.kaizen.animation.curves;
 
 /**
  *
  * @author swhitehead
  */
-public interface Easement {
+public interface AnimationCurve {
 
-	public double calculate(double time);
-	
+    public double calculate(double time);
+
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.kaizen.animation;
+package org.kaizen.animation.ranges;
 
 import java.awt.Color;
 

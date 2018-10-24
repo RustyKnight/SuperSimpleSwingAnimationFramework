@@ -9,6 +9,7 @@ package org.kaizen.animation;
  *
  * @author shanewhitehead
  */
-public class AbstractAnimatableRange {
-    
+public interface DurationAnimatableListener extends AnimatableListener {
+    public void animationPaused(Animatable animator);
+    public void animationCompleted(Animatable animator);
 }

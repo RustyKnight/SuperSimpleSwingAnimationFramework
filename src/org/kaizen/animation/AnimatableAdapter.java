@@ -9,7 +9,7 @@ package org.kaizen.animation;
  *
  * @author swhitehead
  */
-public class AnimatableAdapter implements AnimatableListener, AnimatableLifeCycleListener {
+public class AnimatableAdapter implements AnimatableListener, DurationAnimatableListener {
 
     @Override
     public void animationChanged(Animatable animator) {
@@ -21,6 +21,14 @@ public class AnimatableAdapter implements AnimatableListener, AnimatableLifeCycl
 
     @Override
     public void animationStopped(Animatable animator) {
+    }
+
+    @Override
+    public void animationPaused(Animatable animator) {
+    }
+
+    @Override
+    public void animationCompleted(Animatable animator) {
     }
 
 }

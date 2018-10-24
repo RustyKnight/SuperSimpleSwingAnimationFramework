@@ -6,7 +6,7 @@
 package org.kaizen.animation;
 
 import java.time.Duration;
-import org.kaizen.animation.easement.Easement;
+import org.kaizen.animation.curves.AnimationCurve;
 
 public interface Animatable {
 

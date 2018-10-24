@@ -8,10 +8,8 @@ package org.kaizen.animation;
 public abstract class AbstractAnimatable implements Animatable {
 
     private AnimatableListener animatableListener;
-    private AnimatableLifeCycleListener lifeCycleListener;
 
-    public AbstractAnimatable(AnimatableListener listener, AnimatableLifeCycleListener lifeCycleListener) {
-        this.lifeCycleListener = lifeCycleListener;
+    public AbstractAnimatable(AnimatableListener listener) {
         this.animatableListener = animatableListener;
     }
 
@@ -40,17 +38,17 @@ public abstract class AbstractAnimatable implements Animatable {
     }
 
     protected void fireAnimationStarted() {
-        if (lifeCycleListener == null) {
+        if (animatableListener == null) {
             return;
         }
-        lifeCycleListener.animationStarted(this);
+        animatableListener.animationStarted(this);
     }
 
     protected void fireAnimationStopped() {
-        if (lifeCycleListener == null) {
+        if (animatableListener == null) {
             return;
         }
-        lifeCycleListener.animationStopped(this);
+        animatableListener.animationStopped(this);
     }
 
 }

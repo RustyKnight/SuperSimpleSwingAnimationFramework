@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.kaizen.animation.easement;
+package org.kaizen.animation.curves;
 
 /**
  *
  * @author swhitehead
  */
-public class LinearEasement implements Easement {
-	
-	@Override
-	public double calculate(double time) {
-		return time;
-	}
-	
+public class LinearCurve implements AnimationCurve {
+
+    @Override
+    public double calculate(double time) {
+        return time;
+    }
+
 }
