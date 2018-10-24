@@ -135,8 +135,20 @@ public class TestTimeLine {
             timeLine.addKeyFrame(0.53, new Object());
             timeLine.addKeyFrame(0.75, new Object());
             timeLine.addKeyFrame(0.9, new Object());
+            
+//            System.out.println(timeLine.getEventsAt(0.0));
+//            System.out.println(timeLine.getEventsAt(0.01));
+//            System.out.println(timeLine.getEventsAt(0.02));
+//            System.out.println(timeLine.getEventsAt(0.03));
+//            System.out.println(timeLine.getEventsAt(0.04));
+//            System.out.println(timeLine.getEventsAt(0.05));
+//            System.out.println(timeLine.getEventsAt(0.06));
+//            System.out.println(timeLine.getEventsAt(0.07));
+//            System.out.println(timeLine.getEventsAt(0.08));
+//            System.out.println(timeLine.getEventsAt(0.09));
+//            System.out.println(timeLine.getEventsAt(0.1));
 
-            animatable = new DefaultAnimatableDuration(Duration.ofSeconds(5), Curves.SINE_IN_OUT.getCurve(), new AnimatableAdapter<Double>() {
+            animatable = new DefaultAnimatableDuration(Duration.ofSeconds(10), Curves.SINE_IN_OUT.getCurve(), new AnimatableAdapter<Double>() {
                 @Override
                 public void animationTimeChanged(AnimatableDuration animatable) {
                     progress = animatable.getProgress();
@@ -203,7 +215,7 @@ public class TestTimeLine {
                     pointAlphas.remove(value);
                     repaint();
                 }
-                
+
             });
             pointAnimatable.start();
         }
@@ -231,7 +243,7 @@ public class TestTimeLine {
             for (Map.Entry<Object, Float> entry : pointAlphas.entrySet()) {
                 double potl = timeLine.getPointOnTimeLine(entry.getKey());
                 double xPos = startX + (range * potl);
-                
+
                 Graphics2D alpha2D = (Graphics2D) g2d.create();
                 alpha2D.setComposite(AlphaComposite.SrcOver.derive(entry.getValue()));
                 Ellipse2D dot = new Ellipse2D.Double(xPos - 5, yPos - 5, 10, 10);

@@ -46,28 +46,34 @@ public class EventTimeLine<T> extends AbstractTimeLine<T> {
 
         Map<Double, KeyFrame<T>> events = getEvents();
 
-        int startAt = 0;
-
-        List<Double> keyFrames = new ArrayList<>(events.keySet());
-        while (startAt < keyFrames.size() && keyFrames.get(startAt) <= progress - delta) {
-            startAt++;
-        }
-
-        startAt = Math.min(keyFrames.size() - 1, startAt);
-        int endAt = startAt;
-        while (endAt < keyFrames.size() && keyFrames.get(endAt) <= progress + delta) {
-            endAt++;
-        }
-        endAt = Math.min(keyFrames.size() - 1, endAt);
-
         List<KeyFrame<T>> frames = new ArrayList<>(5);
-        for (int index = startAt; index <= endAt; index++) {
-            KeyFrame<T> keyFrame = events.get(keyFrames.get(index));
-            if (keyFrame.getProgress() >= progress - delta
-                    && keyFrame.getProgress() <= progress + delta) {
-                frames.add(keyFrame);
+        for (Map.Entry<Double, KeyFrame<T>> entry : events.entrySet()) {
+            if (entry.getKey() >= progress - delta && entry.getKey() <= progress + delta) {
+                frames.add(entry.getValue());
             }
         }
+        
+//        int startAt = 0;
+//        List<Double> keyFrames = new ArrayList<>(events.keySet());
+//        while (startAt < keyFrames.size() && keyFrames.get(startAt) <= progress - delta) {
+//            startAt++;
+//        }
+//
+//        startAt = Math.min(keyFrames.size() - 1, startAt);
+//        int endAt = startAt;
+//        while (endAt < keyFrames.size() && keyFrames.get(endAt) <= progress + delta) {
+//            endAt++;
+//        }
+//        endAt = Math.min(keyFrames.size() - 1, endAt);
+//
+//        List<KeyFrame<T>> frames = new ArrayList<>(5);
+//        for (int index = startAt; index <= endAt; index++) {
+//            KeyFrame<T> keyFrame = events.get(keyFrames.get(index));
+//            if (keyFrame.getProgress() >= progress - delta
+//                    && keyFrame.getProgress() <= progress + delta) {
+//                frames.add(keyFrame);
+//            }
+//        }
 
         return frames;
 
