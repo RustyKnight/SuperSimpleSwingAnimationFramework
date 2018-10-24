@@ -8,9 +8,9 @@ package org.kaizen.animation.ranges;
 import java.time.Duration;
 import org.kaizen.animation.curves.AnimationCurve;
 
-public class DoubleAnimatable extends AbstractAnimatableRange<Double> {
+public class IntAnimatableRange extends AbstractAnimatableRange<Integer> {
 
-    public DoubleAnimatable(DoubleRange range, Duration duration, AnimationCurve curve, AnimatableRangeListener<Double> listener) {
+    public IntAnimatableRange(IntRange range, Duration duration, AnimationCurve curve, AnimatableRangeListener<Integer> listener) {
         super(range, duration, curve, listener);
     }
 

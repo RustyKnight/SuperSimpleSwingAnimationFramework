@@ -5,14 +5,14 @@
  */
 package org.kaizen.animation.ranges;
 
+import java.awt.Color;
 import java.time.Duration;
 import org.kaizen.animation.curves.AnimationCurve;
 
+public class ColorAnimatableRange extends AbstractAnimatableRange<Color> {
 
-public class FloatAnimatable extends AbstractAnimatableRange<Float> {
-
-    public FloatAnimatable(FloatRange range, Duration duration, AnimationCurve curve, AnimatableRangeListener<Float> listener) {
-        super(range, duration, curve, listener);
+    public ColorAnimatableRange(ColorRange animationRange, Duration duration, AnimationCurve curve, AnimatableRangeListener<Color> listener) {
+        super(animationRange, duration, curve, listener);
     }
 
 }

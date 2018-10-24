@@ -58,7 +58,7 @@ public class AbstractAnimatableDuration extends AbstractAnimatable implements An
             return 0.0;
         }
         Duration duration = getDuration();
-        Duration runningTime = Duration.between(startTime, LocalDateTime.now());
+        Duration runningTime = Duration.between(startTime, Instant.now());
         double progress = rawOffset + (runningTime.toMillis() / (double) duration.toMillis());
 
         return Math.min(1.0, Math.max(0.0, progress));

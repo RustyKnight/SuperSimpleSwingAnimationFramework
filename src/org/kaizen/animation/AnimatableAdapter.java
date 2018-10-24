@@ -5,11 +5,14 @@
  */
 package org.kaizen.animation;
 
+import org.kaizen.animation.ranges.AnimatableRange;
+import org.kaizen.animation.ranges.AnimatableRangeListener;
+
 /**
  *
  * @author swhitehead
  */
-public class AnimatableAdapter implements AnimatableListener, DurationAnimatableListener {
+public class AnimatableAdapter<T> implements AnimatableListener, DurationAnimatableListener, AnimatableRangeListener<T> {
 
     @Override
     public void animationChanged(Animatable animator) {
@@ -29,6 +32,10 @@ public class AnimatableAdapter implements AnimatableListener, DurationAnimatable
 
     @Override
     public void animationCompleted(Animatable animator) {
+    }
+
+    @Override
+    public void animationChange(AnimatableRange<T> animatable) {
     }
 
 }
