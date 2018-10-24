@@ -5,10 +5,10 @@
  */
 package org.kaizen.animation.timeline;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
@@ -42,35 +42,36 @@ public class EventTimeLine<T> extends AbstractTimeLine<T> {
                 .collect(Collectors.toList());
     }
 
-//    public List<KeyFrame<T>> getKeyFramesBetween(double progress, double delta) {
-//
-//        int startAt = 0;
-//
-//        List<Double> keyFrames = new ArrayList<>(mapEvents.keySet());
-//        while (startAt < keyFrames.size() && keyFrames.get(startAt) <= progress - delta) {
-//            startAt++;
-//        }
-//
-//        startAt = Math.min(keyFrames.size() - 1, startAt);
-//        int endAt = startAt;
-//        while (endAt < keyFrames.size() && keyFrames.get(endAt) <= progress + delta) {
-//            endAt++;
-//        }
-//        endAt = Math.min(keyFrames.size() - 1, endAt);
-//
-//        List<KeyFrame<T>> frames = new ArrayList<>(5);
-//        for (int index = startAt; index <= endAt; index++) {
-//            KeyFrame<T> keyFrame = mapEvents.get(keyFrames.get(index));
-//            if (keyFrame.getProgress() >= progress - delta
-//                    && keyFrame.getProgress() <= progress + delta) {
-//                frames.add(keyFrame);
-//            }
-//        }
-//
-//        return frames;
-//
-//    }
+    public List<KeyFrame<T>> getKeyFramesBetween(double progress, double delta) {
 
+        Map<Double, KeyFrame<T>> events = getEvents();
+
+        int startAt = 0;
+
+        List<Double> keyFrames = new ArrayList<>(events.keySet());
+        while (startAt < keyFrames.size() && keyFrames.get(startAt) <= progress - delta) {
+            startAt++;
+        }
+
+        startAt = Math.min(keyFrames.size() - 1, startAt);
+        int endAt = startAt;
+        while (endAt < keyFrames.size() && keyFrames.get(endAt) <= progress + delta) {
+            endAt++;
+        }
+        endAt = Math.min(keyFrames.size() - 1, endAt);
+
+        List<KeyFrame<T>> frames = new ArrayList<>(5);
+        for (int index = startAt; index <= endAt; index++) {
+            KeyFrame<T> keyFrame = events.get(keyFrames.get(index));
+            if (keyFrame.getProgress() >= progress - delta
+                    && keyFrame.getProgress() <= progress + delta) {
+                frames.add(keyFrame);
+            }
+        }
+
+        return frames;
+
+    }
 
 }
 

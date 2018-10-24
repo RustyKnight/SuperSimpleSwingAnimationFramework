@@ -8,7 +8,7 @@ package org.kaizen.animation.ranges;
 import java.time.Duration;
 import org.kaizen.animation.curves.AnimationCurve;
 
-public class DoubleAnimatableRange extends AbstractAnimatableRange<Double> {
+public class DoubleAnimatableRange extends DefaultAnimatableRange<Double> {
 
     public DoubleAnimatableRange(DoubleRange range, Duration duration, AnimationCurve curve, AnimatableRangeListener<Double> listener) {
         super(range, duration, curve, listener);

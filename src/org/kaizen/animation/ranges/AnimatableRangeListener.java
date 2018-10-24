@@ -5,12 +5,12 @@
  */
 package org.kaizen.animation.ranges;
 
-import org.kaizen.animation.DurationAnimatableListener;
+import org.kaizen.animation.AnimatableDurationListener;
 
 /**
  *
  * @author shanewhitehead
  */
-public interface AnimatableRangeListener<T> extends DurationAnimatableListener {
-    public void animationChange(AnimatableRange<T> animatable);
+public interface AnimatableRangeListener<T> extends AnimatableDurationListener {
+    public void animationChanged(AnimatableRange<T> animatable);
 }

@@ -9,7 +9,8 @@ package org.kaizen.animation;
  *
  * @author shanewhitehead
  */
-public interface DurationAnimatableListener extends AnimatableListener {
+public interface AnimatableDurationListener extends AnimatableListener {
     public void animationPaused(Animatable animator);
     public void animationCompleted(Animatable animator);
+    public void animationTimeChanged(AnimatableDuration animatable);
 }

@@ -6,22 +6,21 @@
 package org.kaizen.animation.ranges;
 
 import java.time.Duration;
-import org.kaizen.animation.AbstractAnimatableDuration;
-import org.kaizen.animation.AnimatableListener;
+import org.kaizen.animation.DefaultAnimatableDuration;
 import org.kaizen.animation.curves.AnimationCurve;
 
 /**
  *
  * @author shanewhitehead
  */
-public class AbstractAnimatableRange<T> extends AbstractAnimatableDuration implements AnimatableRange<T>{
+public class DefaultAnimatableRange<T> extends DefaultAnimatableDuration implements AnimatableRange<T>{
     
     private Range<T> range;
     private T value;
     
     private AnimatableRangeListener<T> listener;
 
-    public AbstractAnimatableRange(Range<T> range, Duration duration, AnimationCurve curve, AnimatableRangeListener<T> listener) {
+    public DefaultAnimatableRange(Range<T> range, Duration duration, AnimationCurve curve, AnimatableRangeListener<T> listener) {
         super(duration, curve, listener);
         this.listener = listener;
         this.range = range;
@@ -58,7 +57,7 @@ public class AbstractAnimatableRange<T> extends AbstractAnimatableDuration imple
         if (listener == null) {
             return;
         }
-        listener.animationChange(this);
+        listener.animationChanged(this);
     }
 
 }

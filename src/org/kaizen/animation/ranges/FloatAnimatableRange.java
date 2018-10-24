@@ -9,7 +9,7 @@ import java.time.Duration;
 import org.kaizen.animation.curves.AnimationCurve;
 
 
-public class FloatAnimatableRange extends AbstractAnimatableRange<Float> {
+public class FloatAnimatableRange extends DefaultAnimatableRange<Float> {
 
     public FloatAnimatableRange(FloatRange range, Duration duration, AnimationCurve curve, AnimatableRangeListener<Float> listener) {
         super(range, duration, curve, listener);

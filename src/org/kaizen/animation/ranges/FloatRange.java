@@ -22,7 +22,7 @@ public class FloatRange extends Range<Float> {
     @Override
     public Float valueAt(double progress) {
         float distance = getDistance();
-        float value = (float) Math.round(distance * progress);
+        float value = distance * (float)progress;
         value += getFrom();
         return value;
     }

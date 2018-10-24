@@ -5,12 +5,12 @@
  */
 package org.kaizen.animation;
 
-public abstract class AbstractAnimatable implements Animatable {
+public class DefaultAnimatable implements Animatable {
 
     private AnimatableListener animatableListener;
 
-    public AbstractAnimatable(AnimatableListener listener) {
-        this.animatableListener = animatableListener;
+    public DefaultAnimatable(AnimatableListener listener) {
+        this.animatableListener = listener;
     }
 
     @Override

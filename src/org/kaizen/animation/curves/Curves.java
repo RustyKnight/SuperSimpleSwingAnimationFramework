@@ -63,7 +63,7 @@ public enum Curves {
         return easement.calculate(time);
     }
 
-    public AnimationCurve getEasement() {
+    public AnimationCurve getCurve() {
         return easement;
     }
 

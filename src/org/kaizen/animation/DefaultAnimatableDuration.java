@@ -14,16 +14,16 @@ import org.kaizen.animation.curves.AnimationCurve;
  *
  * @author shanewhitehead
  */
-public class AbstractAnimatableDuration extends AbstractAnimatable implements AnimatableDuration {
+public class DefaultAnimatableDuration extends DefaultAnimatable implements AnimatableDuration {
 
     private Instant startTime;
     private Duration duration = Duration.ofSeconds(5);
     private AnimationCurve curve;
     private double rawOffset;
 
-    private DurationAnimatableListener durationAnimatableListener;
+    private AnimatableDurationListener durationAnimatableListener;
 
-    public AbstractAnimatableDuration(Duration duration, AnimationCurve easement, DurationAnimatableListener listener) {
+    public DefaultAnimatableDuration(Duration duration, AnimationCurve easement, AnimatableDurationListener listener) {
         super(listener);
         this.durationAnimatableListener = listener;
         this.curve = easement;
@@ -66,6 +66,9 @@ public class AbstractAnimatableDuration extends AbstractAnimatable implements An
 
     @Override
     public void tick() {
+        if (startTime == null) {
+            stop();
+        }
         double rawProgress = getRawProgress();
         fireAnimationChanged();
         if (rawProgress >= 1.0) {
@@ -83,6 +86,12 @@ public class AbstractAnimatableDuration extends AbstractAnimatable implements An
     }
 
     @Override
+    public void stop() {
+        startTime = null;
+        super.stop();
+    }
+
+    @Override
     public void pause() {
         rawOffset += getRawProgress();
         Animator.INSTANCE.remove(this);
@@ -97,6 +106,12 @@ public class AbstractAnimatableDuration extends AbstractAnimatable implements An
     protected void completed() {
         stop();
         fireAnimationCompleted();
+    }
+
+    @Override
+    protected void fireAnimationChanged() {
+        durationAnimatableListener.animationTimeChanged(this);
+        super.fireAnimationChanged();
     }
 
     protected void fireAnimationPaused() {

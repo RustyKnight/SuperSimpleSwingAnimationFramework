@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.time.Duration;
 import org.kaizen.animation.curves.AnimationCurve;
 
-public class ColorAnimatableRange extends AbstractAnimatableRange<Color> {
+public class ColorAnimatableRange extends DefaultAnimatableRange<Color> {
 
     public ColorAnimatableRange(ColorRange animationRange, Duration duration, AnimationCurve curve, AnimatableRangeListener<Color> listener) {
         super(animationRange, duration, curve, listener);
