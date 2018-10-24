@@ -5,10 +5,16 @@
  */
 package org.kaizen.animation;
 
+import java.time.Duration;
+import org.kaizen.animation.easement.Easement;
+
 /**
  *
- * @author swhitehead
+ * @author shanewhitehead
  */
-public interface AnimatableListener {
-    public void animationChanged(Animatable animator);
+public interface AnimatableRange<T> extends AnimatableDuration {
+
+    public Range<T> getRange();
+    public T getValue();
+
 }

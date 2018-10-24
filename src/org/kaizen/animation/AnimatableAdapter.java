@@ -9,21 +9,18 @@ package org.kaizen.animation;
  *
  * @author swhitehead
  */
-public class AnimatableAdapter<T> implements AnimatableListener<T>, AnimatableLifeCycleListener<T> {
+public class AnimatableAdapter implements AnimatableListener, AnimatableLifeCycleListener {
 
-	@Override
-	public void animationChanged(Animatable<T> animator) {};
+    @Override
+    public void animationChanged(Animatable animator) {
+    }
 
-	@Override
-	public void animationStopped(Animatable<T> animator) {};
+    @Override
+    public void animationStarted(Animatable animator) {
+    }
 
-	@Override
-	public void animationPaused(Animatable<T> animator) {};
+    @Override
+    public void animationStopped(Animatable animator) {
+    }
 
-	@Override
-	public void animationStarted(Animatable<T> animator) {};
-
-	@Override
-	public void animationCompleted(Animatable<T> animator) {};
-	
 }

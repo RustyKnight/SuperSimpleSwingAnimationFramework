@@ -7,8 +7,8 @@ package org.kaizen.animation;
 
 /**
  *
- * @author swhitehead
+ * @author shanewhitehead
  */
-public interface AnimatableListener {
-    public void animationChanged(Animatable animator);
+public class AbstractAnimatableRange {
+    
 }

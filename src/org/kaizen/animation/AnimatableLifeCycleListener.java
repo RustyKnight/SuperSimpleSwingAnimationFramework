@@ -9,9 +9,7 @@ package org.kaizen.animation;
  *
  * @author swhitehead
  */
-public interface AnimatableLifeCycleListener<T> {
-	public void animationCompleted(Animatable<T> animator);
-	public void animationStarted(Animatable<T> animator);
-	public void animationPaused(Animatable<T> animator);
-	public void animationStopped(Animatable<T> animator);
+public interface AnimatableLifeCycleListener {
+    public void animationStarted(Animatable animator);
+    public void animationStopped(Animatable animator);
 }
