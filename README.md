@@ -32,11 +32,11 @@ The framework makes use of "normalized" time, this is, time values between 0 and
 
 A lot of the time, I spend animating from one point to another, over a period of time.  The "range" based animation provides for an abstracted approach to this problem.
 
-Given a range of `A` to `B`, the framework can be used to calculate the `value` between them, over a normalized time frame, making it very simply to update the state simply by asking for the "current" value of the animator when the state of the animator changes.
+Given a range of `A` to `B`, the framework can be used to calculate the `value` between them, over a normalized time frame, making it very simple to update the state simply by asking for the "current" value of the animator when the state of the animator changes.
 
 # Timeline
 
-Another use case I run into on a regular bases is "timelines".  A timeline is simply a normalized period of time, on which `KeyFrame`s reside and specific points along it.
+Another use case I run into on a regular bases is "timelines".  A timeline is simply a normalized period of time, on which `KeyFrame`s reside at specific points along it.
 
 The framework provides for both "Event" and "Blending" timelines
 
@@ -46,7 +46,7 @@ An event timeline provides the means to get all the events which occur at (about
 
 ## `BlendingTimeLine`
 
-A blending timeline provides the means to calculate the value between to key frames along the timeline based on the position along the timeline
+A blending timeline provides the means to calculate the value between two key frames along the timeline based on the position along the timeline
 
 # Animation Curves
 
