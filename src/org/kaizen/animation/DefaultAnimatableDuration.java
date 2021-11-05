@@ -16,12 +16,18 @@ import org.kaizen.animation.curves.AnimationCurve;
  */
 public class DefaultAnimatableDuration extends DefaultAnimatable implements AnimatableDuration {
 
+    protected enum State {
+        RUNNING, STOPPED, PAUSED;
+    }
+
     private Instant startTime;
     private Duration duration = Duration.ofSeconds(5);
     private AnimationCurve curve;
     private double rawOffset;
 
     private AnimatableDurationListener durationAnimatableListener;
+
+    private State state;
 
     public DefaultAnimatableDuration(Duration duration, AnimationCurve easement, AnimatableDurationListener listener) {
         super(listener);
@@ -32,6 +38,18 @@ public class DefaultAnimatableDuration extends DefaultAnimatable implements Anim
 
     public Duration getDuration() {
         return duration;
+    }
+
+    public Duration getRemainingDuration() {
+        if (startTime == null && state == State.PAUSED) {
+            return duration;
+        } else if (startTime == null && state == State.STOPPED) {
+            return Duration.ZERO;
+        }
+        Duration duration = getDuration();
+        Duration runningTime = Duration.between(startTime, Instant.now());
+
+        return duration.minus(runningTime);
     }
 
     @Override
@@ -82,11 +100,13 @@ public class DefaultAnimatableDuration extends DefaultAnimatable implements Anim
             return;
         }
         startTime = Instant.now();
+        state = State.RUNNING;
         super.start();
     }
 
     @Override
     public void stop() {
+        state = State.STOPPED;
         startTime = null;
         super.stop();
     }
@@ -99,6 +119,8 @@ public class DefaultAnimatableDuration extends DefaultAnimatable implements Anim
         double remainingProgress = 1.0 - rawOffset;
         Duration remainingTime = getDuration().minusMillis((long) remainingProgress);
         duration = remainingTime;
+
+        state = State.PAUSED;
 
         fireAnimationPaused();
     }
