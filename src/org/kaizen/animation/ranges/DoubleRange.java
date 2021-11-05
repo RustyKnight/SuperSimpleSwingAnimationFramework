@@ -22,7 +22,7 @@ public class DoubleRange extends Range<Double> {
     @Override
     public Double valueAt(double progress) {
         double distance = getDistance();
-        double value = (double) Math.round(distance * progress);
+        double value = distance * progress;
         value += getFrom();
         return value;
     }
