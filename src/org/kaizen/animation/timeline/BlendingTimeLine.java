@@ -7,8 +7,6 @@ package org.kaizen.animation.timeline;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * A implementation of a time line which blends values between key frames.
@@ -61,19 +59,10 @@ public class BlendingTimeLine<T> extends AbstractTimeLine<T> {
     }
 
     public List<KeyFrame<T>> getKeyFramesBetween(double progress) {
-
         List<KeyFrame<T>> keyFrames = getKeyFrames();
-//        
-//        Map<Double, KeyFrame<T>> events = getEvents();
-//
-        List<KeyFrame<T>> frames = new ArrayList<>(2);
+        
+        List<KeyFrame<T>> frames = new ArrayList<>(2);        
         int startAt = 0;
-//
-//        List<Double> keyFrames = events
-//                .keySet()
-//                .stream()
-//                .sorted()
-//                .collect(Collectors.toList());
         while (startAt < keyFrames.size() && keyFrames.get(startAt).getProgress() <= progress) {
             startAt++;
         }
