@@ -9,8 +9,9 @@ public class FloatBlender implements BlendingTimeLine.Blender<Float> {
 
     @Override
     public Float blend(Float start, Float end, double ratio) {
-        double ir = (int) 1.0 - ratio;
-        return (float)(start * ratio + end * ir);
+        float ir = 1.0f - (float)ratio;
+        float value = start + ((end - start) * ir);
+        return value;
     }
 
 }

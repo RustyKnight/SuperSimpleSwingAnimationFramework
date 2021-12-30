@@ -39,13 +39,15 @@ public class BlendingTimeLine<T> extends AbstractTimeLine<T> {
         }
 
         List<KeyFrame<T>> keyFrames = getKeyFramesBetween(progress);
+        
+        double fromProgress = keyFrames.get(0).getProgress();
+        double toProgress = keyFrames.get(1).getProgress();
+        
+        double keyframeProgressRange = toProgress - fromProgress;        
+        double distance = progress - fromProgress;        
+        double keyframeProgress = distance / keyframeProgressRange;
 
-        double max = keyFrames.get(1).getProgress() - keyFrames.get(0).getProgress();
-        double value = progress - keyFrames.get(0).getProgress();
-        double weight = value / max;
-
-        T blend = blend(keyFrames.get(0).getValue(), 
-                keyFrames.get(1).getValue(), 1d - weight);
+        T blend = blend(keyFrames.get(0).getValue(), keyFrames.get(1).getValue(), 1d - keyframeProgress);
         return blend;
     }
 
@@ -54,25 +56,36 @@ public class BlendingTimeLine<T> extends AbstractTimeLine<T> {
     }
 
     public interface Blender<T> {
+
         public T blend(T start, T end, double ratio);
     }
 
     public List<KeyFrame<T>> getKeyFramesBetween(double progress) {
 
         Map<Double, KeyFrame<T>> events = getEvents();
-        
+
         List<KeyFrame<T>> frames = new ArrayList<>(2);
         int startAt = 0;
-        
-        List<Double> keyFrames = events.keySet().stream().collect(Collectors.toList());
+
+        List<Double> keyFrames = events
+                .keySet()
+                .stream()
+                .sorted()
+                .collect(Collectors.toList());
         while (startAt < keyFrames.size() && keyFrames.get(startAt) <= progress) {
             startAt++;
         }
 
-        startAt = Math.min(startAt, keyFrames.size() - 1);
+        if (startAt >= keyFrames.size()) {
+            KeyFrame<T> keyFrame = events.get(keyFrames.get(startAt - 1));
+            frames.add(keyFrame);
+            frames.add(new DefaultKeyFrame<T>(1.0, keyFrame.getValue()));
+        } else {
+            startAt = Math.min(startAt, keyFrames.size() - 1);
 
-        frames.add(events.get(keyFrames.get(startAt - 1)));
-        frames.add(events.get(keyFrames.get(startAt)));
+            frames.add(events.get(keyFrames.get(startAt - 1)));
+            frames.add(events.get(keyFrames.get(startAt)));
+        }
 
         return frames;
 

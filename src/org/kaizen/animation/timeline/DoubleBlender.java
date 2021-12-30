@@ -10,7 +10,8 @@ public class DoubleBlender implements BlendingTimeLine.Blender<Double> {
     @Override
     public Double blend(Double start, Double end, double ratio) {
         double ir = (double) 1.0 - ratio;
-        return (double) (start * ratio + end * ir);
+        double value = start + ((end - start) * ir);
+        return value;
     }
 
 }
