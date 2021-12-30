@@ -31,6 +31,7 @@ import org.kaizen.animation.ranges.FloatRange;
 import org.kaizen.animation.timeline.BlendingTimeLine;
 import org.kaizen.animation.timeline.EventTimeLine;
 import org.kaizen.animation.timeline.FloatBlender;
+import org.kaizen.animation.timeline.KeyFrame;
 
 /**
  *
@@ -231,8 +232,9 @@ public class TestTimeLine {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setColor(Color.DARK_GRAY);
             g2d.drawLine(startX, yPos, endX, yPos);
-            for (Object value : timeLine.getValues()) {
-                double potl = timeLine.getPointOnTimeLine(value);
+            
+            for (KeyFrame<Object> frame : timeLine.getKeyFrames()) {
+                double potl = timeLine.getPointOnTimeLine(frame.getValue());
                 double xPos = startX + (range * potl);
 
                 Ellipse2D dot = new Ellipse2D.Double(xPos - 2.5, yPos - 2.5, 5, 5);

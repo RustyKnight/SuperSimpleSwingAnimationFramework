@@ -62,29 +62,31 @@ public class BlendingTimeLine<T> extends AbstractTimeLine<T> {
 
     public List<KeyFrame<T>> getKeyFramesBetween(double progress) {
 
-        Map<Double, KeyFrame<T>> events = getEvents();
-
+        List<KeyFrame<T>> keyFrames = getKeyFrames();
+//        
+//        Map<Double, KeyFrame<T>> events = getEvents();
+//
         List<KeyFrame<T>> frames = new ArrayList<>(2);
         int startAt = 0;
-
-        List<Double> keyFrames = events
-                .keySet()
-                .stream()
-                .sorted()
-                .collect(Collectors.toList());
-        while (startAt < keyFrames.size() && keyFrames.get(startAt) <= progress) {
+//
+//        List<Double> keyFrames = events
+//                .keySet()
+//                .stream()
+//                .sorted()
+//                .collect(Collectors.toList());
+        while (startAt < keyFrames.size() && keyFrames.get(startAt).getProgress() <= progress) {
             startAt++;
         }
 
         if (startAt >= keyFrames.size()) {
-            KeyFrame<T> keyFrame = events.get(keyFrames.get(startAt - 1));
+            KeyFrame<T> keyFrame = keyFrames.get(startAt - 1);
             frames.add(keyFrame);
             frames.add(new DefaultKeyFrame<T>(1.0, keyFrame.getValue()));
         } else {
             startAt = Math.min(startAt, keyFrames.size() - 1);
 
-            frames.add(events.get(keyFrames.get(startAt - 1)));
-            frames.add(events.get(keyFrames.get(startAt)));
+            frames.add(keyFrames.get(startAt - 1));
+            frames.add(keyFrames.get(startAt));
         }
 
         return frames;

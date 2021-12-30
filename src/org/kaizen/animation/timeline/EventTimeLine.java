@@ -21,12 +21,12 @@ public class EventTimeLine<T> extends AbstractTimeLine<T> {
 
     public EventTimeLine() {
     }
-
-    public List<T> getValues() {
-        return Collections.unmodifiableList(getEvents().values().stream()
-                .map(kf -> kf.getValue())
-                .collect(Collectors.toList()));
-    }
+//
+//    public List<T> getValues() {
+//        return Collections.unmodifiableList(getEvents().values().stream()
+//                .map(kf -> kf.getValue())
+//                .collect(Collectors.toList()));
+//    }
 
     public List<T> getEventsAt(double progress) {
 
@@ -44,14 +44,24 @@ public class EventTimeLine<T> extends AbstractTimeLine<T> {
 
     public List<KeyFrame<T>> getKeyFramesBetween(double progress, double delta) {
 
-        Map<Double, KeyFrame<T>> events = getEvents();
+        List<KeyFrame<T>> keyFrames = getKeyFrames();
+        
+//        Map<Double, KeyFrame<T>> events = getEvents();
+
 
         List<KeyFrame<T>> frames = new ArrayList<>(5);
-        for (Map.Entry<Double, KeyFrame<T>> entry : events.entrySet()) {
-            if (entry.getKey() >= progress - delta && entry.getKey() <= progress + delta) {
-                frames.add(entry.getValue());
+        for (KeyFrame<T> keyFrame : keyFrames) {
+            if (keyFrame.getProgress() >= progress - delta && keyFrame.getProgress() <= progress + delta) {
+                frames.add(keyFrame);
             }
         }
+
+//        List<KeyFrame<T>> frames = new ArrayList<>(5);
+//        for (Map.Entry<Double, KeyFrame<T>> entry : events.entrySet()) {
+//            if (entry.getKey() >= progress - delta && entry.getKey() <= progress + delta) {
+//                frames.add(entry.getValue());
+//            }
+//        }
         
 //        int startAt = 0;
 //        List<Double> keyFrames = new ArrayList<>(events.keySet());
