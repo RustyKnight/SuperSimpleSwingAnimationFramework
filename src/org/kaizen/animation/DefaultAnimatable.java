@@ -8,9 +8,19 @@ package org.kaizen.animation;
 public class DefaultAnimatable implements Animatable {
 
     private AnimatableListener animatableListener;
+    
+    private boolean animating = false;
 
     public DefaultAnimatable(AnimatableListener listener) {
         this.animatableListener = listener;
+    }
+
+    public boolean isAnimating() {
+        return animating;
+    }
+
+    protected void setAnimating(boolean animating) {
+        this.animating = animating;
     }
 
     @Override
@@ -20,12 +30,20 @@ public class DefaultAnimatable implements Animatable {
 
     @Override
     public void start() {
+        if (isAnimating()) {
+            return;
+        }
         fireAnimationStarted();
+        setAnimating(true);
         Animator.INSTANCE.add(this);
     }
 
     @Override
     public void stop() {
+        if (!isAnimating()) {
+            return;
+        }
+        setAnimating(false);
         Animator.INSTANCE.remove(this);
         fireAnimationStopped();
     }
@@ -49,6 +67,22 @@ public class DefaultAnimatable implements Animatable {
             return;
         }
         animatableListener.animationStopped(this);
+    }
+    
+    public static class AnimatableListenerAdaptor implements AnimatableListener {
+
+        @Override
+        public void animationChanged(Animatable animator) {
+        }
+
+        @Override
+        public void animationStarted(Animatable animator) {
+        }
+
+        @Override
+        public void animationStopped(Animatable animator) {
+        }
+        
     }
 
 }

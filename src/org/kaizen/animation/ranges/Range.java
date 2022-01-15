@@ -6,28 +6,34 @@
 package org.kaizen.animation.ranges;
 
 public abstract class Range<T> {
-	
-	private T from;
-	private T to;
 
-	public Range(T from, T to) {
-		this.from = from;
-		this.to = to;
-	}
+    private T from;
+    private T to;
 
-	public T getFrom() {
-		return from;
-	}
+    public Range(T from, T to) {
+        this.from = from;
+        this.to = to;
+    }
 
-	public T getTo() {
-		return to;
-	}
+    public T getFrom() {
+        return from;
+    }
 
-	@Override
-	public String toString() {
-		return "From " + getFrom() + " to " + getTo();
-	}
+    public T getTo() {
+        return to;
+    }
 
-	public abstract T valueAt(double progress);
-	
+    @Override
+    public String toString() {
+        return "From " + getFrom() + " to " + getTo();
+    }
+
+    public abstract T valueAt(double progress);
+
+    public void reverse() {
+        T nextFrom = to;
+        to = from;
+        from = nextFrom;
+    }
+    
 }
