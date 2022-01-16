@@ -9,18 +9,19 @@ public class DefaultAnimatable implements Animatable {
 
     private AnimatableListener animatableListener;
     
-    private boolean animating = false;
+    private boolean running = false;
 
     public DefaultAnimatable(AnimatableListener listener) {
         this.animatableListener = listener;
     }
 
-    public boolean isAnimating() {
-        return animating;
+    @Override
+    public boolean isRunning() {
+        return running;
     }
 
-    protected void setAnimating(boolean animating) {
-        this.animating = animating;
+    protected void setRunning(boolean running) {
+        this.running = running;
     }
 
     @Override
@@ -30,20 +31,20 @@ public class DefaultAnimatable implements Animatable {
 
     @Override
     public void start() {
-        if (isAnimating()) {
+        if (isRunning()) {
             return;
         }
         fireAnimationStarted();
-        setAnimating(true);
+        setRunning(true);
         Animator.INSTANCE.add(this);
     }
 
     @Override
     public void stop() {
-        if (!isAnimating()) {
+        if (!isRunning()) {
             return;
         }
-        setAnimating(false);
+        setRunning(false);
         Animator.INSTANCE.remove(this);
         fireAnimationStopped();
     }
@@ -69,20 +70,4 @@ public class DefaultAnimatable implements Animatable {
         animatableListener.animationStopped(this);
     }
     
-    public static class AnimatableListenerAdaptor implements AnimatableListener {
-
-        @Override
-        public void animationChanged(Animatable animator) {
-        }
-
-        @Override
-        public void animationStarted(Animatable animator) {
-        }
-
-        @Override
-        public void animationStopped(Animatable animator) {
-        }
-        
-    }
-
 }

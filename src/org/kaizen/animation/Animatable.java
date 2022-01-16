@@ -16,5 +16,7 @@ public interface Animatable {
     // Provide a "self managed" unit of work
     public void start();
     public void stop();
+    
+    public boolean isRunning();
 
 }

@@ -12,5 +12,6 @@ package org.kaizen.animation;
 public interface PausableAnimatable {
     
     public void pause();
+    public boolean isPaused();
     
 }

@@ -5,45 +5,46 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.Timer;
 
 public enum Animator {
-	INSTANCE;
-	private Timer timer;
-	private List<Animatable> properies;
+    INSTANCE;
+    private Timer timer;
+    private List<Animatable> properies;
 
-	private Animator() {
-		properies = new ArrayList<>(5);
-		timer = new Timer(5, new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				List<Animatable> copy = new ArrayList<>(properies);
-				Iterator<Animatable> it = copy.iterator();
-				while (it.hasNext()) {
-					Animatable ap = it.next();
-					ap.tick();
-				}
-				if (properies.isEmpty()) {
-					timer.stop();
-				}
-			}
-		});
-	}
+    private Animator() {
+        properies = new ArrayList<>(512);
+        timer = new Timer(5, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Animatable> copy = new ArrayList<>(properies);
+                for (Animatable ap : copy) {
+                    ap.tick();
+                }
+                if (properies.isEmpty()) {
+                    timer.stop();
+                }
+            }
+        });
+    }
 
-	public void add(Animatable ap) {
-		properies.add(ap);
-		timer.start();
-	}
-	
-	protected void removeAll(List<Animatable> completed) {
-		properies.removeAll(completed);
-	}
+    public void add(Animatable ap) {
+        properies.add(ap);
+        if (!timer.isRunning()) {
+            timer.start();
+        }
+    }
 
-	public void remove(Animatable ap) {
-		properies.remove(ap);
-		if (properies.isEmpty()) {
-			timer.stop();
-		}
-	}
+    protected void removeAll(List<Animatable> completed) {
+        properies.removeAll(completed);
+    }
+
+    public void remove(Animatable ap) {
+        properies.remove(ap);
+        if (properies.isEmpty()) {
+            timer.stop();
+        }
+    }
 
 }

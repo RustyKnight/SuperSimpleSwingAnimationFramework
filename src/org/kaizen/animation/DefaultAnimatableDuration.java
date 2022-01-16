@@ -36,6 +36,16 @@ public class DefaultAnimatableDuration extends DefaultAnimatable implements Anim
         this.duration = duration;
     }
 
+    @Override
+    public boolean isPaused() {
+        return state == State.PAUSED;
+    }
+
+    @Override
+    public boolean isRunning() {
+        return state == State.RUNNING;
+    }
+
     public Duration getDuration() {
         return duration;
     }
@@ -100,15 +110,15 @@ public class DefaultAnimatableDuration extends DefaultAnimatable implements Anim
             return;
         }
         startTime = Instant.now();
-        state = State.RUNNING;
         super.start();
+        state = State.RUNNING;
     }
 
     @Override
     public void stop() {
-        state = State.STOPPED;
         startTime = null;
         super.stop();
+        state = State.STOPPED;
     }
 
     @Override

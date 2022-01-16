@@ -19,4 +19,6 @@ public interface AnimatableDuration extends Animatable, PausableAnimatable {
     public double getProgress();
     public Duration getDuration();
     public AnimationCurve getCurve();
+    
+//    public boolean isRunning();
 }
