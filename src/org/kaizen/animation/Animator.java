@@ -3,9 +3,7 @@ package org.kaizen.animation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
 import javax.swing.Timer;
 
 public enum Animator {
